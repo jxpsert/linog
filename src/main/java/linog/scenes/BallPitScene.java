@@ -71,21 +71,21 @@ public class BallPitScene extends DynamicScene implements TimerContainer {
 		for (int i = 0; i < 12; i++) {
 			if (balls.size() >= 18) {
 			} else {
-				balls.add(new BlueBall(x, rand.nextInt((int)(getHeight() / 2)), 50, word.charAt(i)));
+				balls.add(new BlueBall(x, rand.nextInt((int)(getHeight() / 2)), 100, word.charAt(i)));
 				x += 60;
 			}
 		}
 		for (int i = 0; i < 3; i++) {
 			if (balls.size() >= 18) {
 			} else {
-				balls.add(new GreenBall(x, rand.nextInt((int)(getHeight() / 2)), 50));
+				balls.add(new GreenBall(x, rand.nextInt((int)(getHeight() / 2)), 100));
 				x += 60;
 			}
 		}
 		for (int i = 0; i < 3; i++) {
 			if (balls.size() >= 18) {
 			} else {
-				balls.add(new RedBall(x, rand.nextInt((int)(getHeight() / 2)), 50));
+				balls.add(new RedBall(x, rand.nextInt((int)(getHeight() / 2)), 100));
 				x += 60;
 			}
 		}

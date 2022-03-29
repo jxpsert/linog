@@ -61,14 +61,14 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 		BackButton backButton = new BackButton(75, 100, game);
 		addEntity(backButton);
 		
-		guessedLetters = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 10), "");
-		guessedLetters.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+		guessedLetters = new TextEntity(new Coordinate2D(getWidth() / 4, getHeight() / 10), "               ");
+		guessedLetters.setAnchorPoint(AnchorPoint.CENTER_LEFT);
 		guessedLetters.setFill(Color.WHITE);
 		guessedLetters.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 		addEntity(guessedLetters);
 		
-		foundLettersText = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 10 + 50), "");
-		foundLettersText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+		foundLettersText = new TextEntity(new Coordinate2D(getWidth() / 4, getHeight() / 10 + 50), "               ");
+		foundLettersText.setAnchorPoint(AnchorPoint.CENTER_LEFT);
 		foundLettersText.setFill(Color.WHITE);
 		foundLettersText.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 		addEntity(foundLettersText);
@@ -97,13 +97,13 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 	public void updateGuessed() {
 		if(guessed.size() == 0) return;
 		String text = String.join(", ", guessed);
-		guessedLetters.setText(text + " ZITTEN ER NIET IN");
+		guessedLetters.setText("FOUT: " + text);
 	}
 	
 	public void updateFound() {
 		if(foundLetters.size() == 0) return;
 		String text = String.join(", ", foundLetters);
-		foundLettersText.setText(text + " ZIJN GEVONDEN");
+		foundLettersText.setText("GEVONDEN: " + text);
 	}
 	
 	public void resetBoard() {

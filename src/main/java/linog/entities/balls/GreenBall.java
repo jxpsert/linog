@@ -18,7 +18,7 @@ public class GreenBall extends Ball {
 	 */
 	
 	public GreenBall(int x, int y, int diameter) {
-		super(x, y, diameter, Color.GREEN);
+		super(x, y, diameter, Color.LIME);
 	}
 
 	public int getValue() {

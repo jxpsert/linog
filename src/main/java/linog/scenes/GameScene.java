@@ -132,6 +132,18 @@ public class GameScene extends DynamicScene implements KeyListener, TimerContain
 			dooDooDoo.play();
 		}
 		
+		if(amountRight < 5 && currentRow == 4) {
+			TextEntity feedback = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 5),
+					"HELAAS, NIET GERADEN. HET WOORD WAS: " + Words.getCurrentWord().toUpperCase());
+			feedback.setFill(Color.WHITE);
+			feedback.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+			feedback.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
+			addEntity(feedback);
+			
+			ContinueButton continueButton = new ContinueButton((int)(getWidth() / 5 * 4), (int)(getHeight() / 4 * 3), 4, game);
+			addEntity(continueButton);
+		}
+		
 		
 	}
 
@@ -142,16 +154,15 @@ public class GameScene extends DynamicScene implements KeyListener, TimerContain
 
 	public void submitWord(String word) {
 		int lastRow = 0;
-		currentRow++;
-		currentLetter = 0;
-
-		if (currentRow - 1 < 0) {
+		if (currentRow < 0) {
 			lastRow = 0;
 		} else {
-			lastRow = currentRow - 1;
+			lastRow = currentRow;
 		}
-
 		checkWord(lastRow, Words.getCurrentWord());
+		currentRow++;
+		if(currentRow > 4) currentRow = 4;
+		currentLetter = 0;
 	}
 
 	@Override
