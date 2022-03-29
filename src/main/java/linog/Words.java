@@ -107,6 +107,7 @@ public class Words {
 	public static void setCurrentWord(String currentWord) {
 		if(currentWord.length() != 5) return;
 		Words.currentWord = currentWord;
+		System.out.println(currentWord);
 	}
 	
 	/**
@@ -126,6 +127,7 @@ public class Words {
 	public static void setCurrentPuzzleWord(String currentPuzzleWord) {
 		if(currentPuzzleWord.length() != 12) return;
 		Words.currentPuzzleWord = currentPuzzleWord;
+		System.out.println(currentPuzzleWord);
 	}
 }
 

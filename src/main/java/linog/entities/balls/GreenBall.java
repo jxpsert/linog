@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
  */
 
 public class GreenBall extends Ball {
-	private int value = 10;
+	private int value = 50;
 	
 	/**
 	 * Constructor

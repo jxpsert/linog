@@ -11,7 +11,6 @@ import javafx.scene.text.FontWeight;
 import linog.LinogGame;
 import linog.entities.LinogLogo;
 import linog.entities.Scoreboard;
-import linog.entities.buttons.NextButton;
 import linog.entities.buttons.RetryButton;
 
 public class EndScene extends StaticScene {
@@ -24,10 +23,6 @@ public class EndScene extends StaticScene {
 
 	@Override
 	public void setupEntities() {
-		// TODO Auto-generated method stub
-		NextButton volgende = new NextButton(200, 500, "text",  game);
-		addEntity(volgende);
-		
 		LinogLogo linogTitle = new LinogLogo((int)(getWidth() / 2), (int)(getHeight() / 2), 750, 375);
 		addEntity(linogTitle);
 		

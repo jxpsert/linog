@@ -3,7 +3,6 @@ package linog.entities.buttons;
 import com.github.hanyaeger.api.Coordinate2D;
 
 import javafx.scene.input.MouseButton;
-import javafx.scene.paint.Color;
 import linog.LinogGame;
 
 /**

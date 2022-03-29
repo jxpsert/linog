@@ -4,7 +4,6 @@ import com.github.hanyaeger.api.scenes.StaticScene;
 
 import linog.LinogGame;
 import linog.entities.LinogLogo;
-import linog.entities.buttons.NextButton;
 import linog.entities.buttons.StartButton;
 
 /**
@@ -31,9 +30,6 @@ public class StartScene extends StaticScene {
 		
 		startButton = new StartButton(640, 480, game);
 		addEntity(startButton);
-		
-		NextButton volgende = new NextButton(200, 500, "text",  game);
-		addEntity(volgende);
 	}
 
 	/**

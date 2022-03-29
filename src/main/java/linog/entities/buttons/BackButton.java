@@ -4,7 +4,6 @@ import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 
 import javafx.scene.input.MouseButton;
-import javafx.scene.paint.Color;
 import linog.LinogGame;
 
 /**

@@ -23,7 +23,7 @@ public class Scoreboard extends TextEntity {
 	 * @param y The location on the y-axis
 	 */
 	public Scoreboard(int x, int y) {
-		super(new Coordinate2D(x, y), "€ 000");
+		super(new Coordinate2D(x, y), "€ 0");
 		this.x = x;
 		this.y = y;
 		this.setFill(Color.WHITE);
@@ -55,6 +55,14 @@ public class Scoreboard extends TextEntity {
 	
 	public void resetText() {
 		this.setText("€ " + Scoreboard.money);
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 
 }

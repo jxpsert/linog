@@ -22,6 +22,8 @@ public class Ball extends DynamicCircleEntity implements Collider, Collided, New
 	private int y;
 	private int diameter;
 
+	protected int value;
+
 	/**
 	 * Constructor
 	 * 
@@ -42,17 +44,15 @@ public class Ball extends DynamicCircleEntity implements Collider, Collided, New
 		Random rand = new Random();
 		setMotion(5, rand.nextInt(180));
 
-		setGravityConstant(5.00);
-		//setFrictionConstant(5);
-		System.out.println("x" + x + "y" + y);
+		setGravityConstant(1.00);
+		setFrictionConstant(0.01);
+		//System.out.println("x" + x + "y" + y);
 	}
 
 	@Override
 	public void onCollision(Collider arg0) {
-//		setSpeed(0);
 		//invertSpeedInDirection(getDirection());
-		//System.out.println("boing");
-		//this.y += 60;
+		// Gebruikt om code te testen van collisions tussen ballen
 	}
 
 	@Override
@@ -60,7 +60,8 @@ public class Ball extends DynamicCircleEntity implements Collider, Collided, New
 		Random rand = new Random();
 		switch(border) {
 		case BOTTOM:
-			invertSpeedInDirection(Direction.DOWN);
+			//invertSpeedInDirection(Direction.DOWN);
+			setDirection(rand.nextInt(270 - 90) + 90);
 			break;
 		case LEFT:
 			invertSpeedInDirection(Direction.LEFT);
@@ -70,11 +71,24 @@ public class Ball extends DynamicCircleEntity implements Collider, Collided, New
 		default:
 			break;
 		}
-		
-		
 //		setSpeed(0);
 //		System.out.println(border);
 	}
 	
+	public int getValue() {
+		return value;
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getDiameter() {
+		return diameter;
+	}
 	
 }

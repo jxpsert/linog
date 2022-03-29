@@ -3,9 +3,9 @@ package linog.entities.buttons;
 import com.github.hanyaeger.api.Coordinate2D;
 
 import javafx.scene.input.MouseButton;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import linog.LinogGame;
-import linog.Words;
-
 /**
  * A button containing the word "start". Makes you start the game.
  */
@@ -21,6 +21,7 @@ public class StartButton extends Button {
 	
 	public StartButton(int x, int y, LinogGame game) {
 		super(x, y, "START", game);
+		this.setFont(Font.font("Roboto", FontWeight.BOLD, 50));
 	}
 
 	@Override

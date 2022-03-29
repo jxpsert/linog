@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.KeyListener;
@@ -18,19 +19,25 @@ import linog.Words;
 import linog.entities.LinogLogo;
 import linog.entities.Scoreboard;
 import linog.entities.buttons.BackButton;
-import linog.entities.buttons.NextButton;
+import linog.entities.buttons.ContinueButton;
+import linog.timers.FoundLettersTimer;
+import linog.timers.ScoreboardTimer;
 
-public class PuzzlewordScene extends DynamicScene implements KeyListener {
+public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerContainer {
 
 	private LinogGame game;
 	private ArrayList<String> guessed = new ArrayList<String>();
 	private ArrayList<String> word = new ArrayList<String>();
+	private ArrayList<String> foundLetters = new ArrayList<String>();
 	
 	private int currentLetter;
 	private TextEntity[] board = new TextEntity[12];
 	private boolean guessedIt = false;
 	
 	private TextEntity guessedLetters;
+	private TextEntity foundLettersText;
+	
+	private Scoreboard scoreBoard;
 	
 	public PuzzlewordScene(LinogGame game) {
 		this.game = game;
@@ -54,16 +61,19 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener {
 		BackButton backButton = new BackButton(75, 100, game);
 		addEntity(backButton);
 		
-		guessedLetters = new TextEntity(new Coordinate2D(getWidth() / 10 * 9, getHeight() / 10), "");
-		guessedLetters.setAnchorPoint(AnchorPoint.CENTER_RIGHT);
-		guessedLetters.setFill(Color.RED);
+		guessedLetters = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 10), "");
+		guessedLetters.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+		guessedLetters.setFill(Color.WHITE);
 		guessedLetters.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 		addEntity(guessedLetters);
 		
-		NextButton volgende = new NextButton(200, 500, "text",  game);
-		addEntity(volgende);
-		
-		Scoreboard scoreBoard = new Scoreboard((int)((getWidth() / 100) * 5), (int)((getHeight() / 100) * 5));
+		foundLettersText = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 10 + 50), "");
+		foundLettersText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+		foundLettersText.setFill(Color.WHITE);
+		foundLettersText.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
+		addEntity(foundLettersText);
+
+		scoreBoard = new Scoreboard((int)((getWidth() / 100) * 5), (int)((getHeight() / 100) * 5));
 		addEntity(scoreBoard);
 		
 		for (int i = 0; i< board.length; i++) {
@@ -85,8 +95,19 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener {
 	}
 	
 	public void updateGuessed() {
+		if(guessed.size() == 0) return;
 		String text = String.join(", ", guessed);
-		guessedLetters.setText(text);
+		guessedLetters.setText(text + " ZITTEN ER NIET IN");
+	}
+	
+	public void updateFound() {
+		if(foundLetters.size() == 0) return;
+		String text = String.join(", ", foundLetters);
+		foundLettersText.setText(text + " ZIJN GEVONDEN");
+	}
+	
+	public void resetBoard() {
+		currentLetter = 0;
 	}
 	
 	public void checkWord(String word) {
@@ -110,19 +131,22 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener {
 		}
 
 		if (amountRight == 12) {
-			TextEntity feedback = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 7 * 6), "GOED GERADEN! DRUK OP ENTER OM DOOR TE GAAN!");
+			TextEntity feedback = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 7 * 6), "GOED GERADEN!");
 			feedback.setFill(Color.WHITE);
 			feedback.setAnchorPoint(AnchorPoint.CENTER_CENTER);
 			feedback.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 			addEntity(feedback);
 			guessedIt = true;
+			
+			ContinueButton continueButton = new ContinueButton((int)(getWidth() / 2), (int)(getHeight() / 7 * 6 + 50), 4, game);
+			addEntity(continueButton);
 		}
 		
 		updateGuessed();
 	}
 	
 	public void submitWord(String word) {
-		checkWord("zoetvloeiend");
+		checkWord(Words.getCurrentPuzzleWord());
 	}
 
 	@Override
@@ -180,6 +204,19 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener {
 		default:
 			break;
 	}
+	}
+
+	@Override
+	public void setupTimers() {
+		ScoreboardTimer scoreboardTimer = new ScoreboardTimer(this.scoreBoard);
+		addTimer(scoreboardTimer);
+		
+		FoundLettersTimer foundTimer = new FoundLettersTimer(game);
+		addTimer(foundTimer);
+	}
+	
+	public void addFound(char letter) {
+		foundLetters.add(Character.toString(letter));
 	}
 
 }

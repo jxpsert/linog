@@ -13,6 +13,8 @@ import linog.scenes.StartScene;
  * Main class to initialise game
  */
 
+@SuppressWarnings("exports")
+
 public class LinogGame extends YaegerGame {
 
 	private StartScene startScene;
@@ -31,8 +33,6 @@ public class LinogGame extends YaegerGame {
 		
 		String fiveletter = Words.getFiveLetterWord();
 		String twelveletter = Words.getTwelveLetterWord();
-		System.out.println(fiveletter);
-		System.out.println(twelveletter); 
 		
 		Words.setCurrentPuzzleWord(twelveletter);
 		Words.setCurrentWord(fiveletter);
@@ -48,7 +48,7 @@ public class LinogGame extends YaegerGame {
 		setGameTitle("LINOG");
 		setSize(new Size(1280, 720));
 		setBackgroundAudio("audio/bgmusic.mp3");
-		setBackgroundAudioVolume(0.2);
+		setBackgroundAudioVolume(1);
 	}
 
 	/**
@@ -67,8 +67,50 @@ public class LinogGame extends YaegerGame {
 		addScene(2, ballPitScene);
 		addScene(3, puzzlewordScene);
 		addScene(4, endScene);
-		
-		setActiveScene(2);
+	}
+	
+	/**
+	 * Returns the StartScene
+	 * @return The StartScene
+	 */
+	public StartScene getStartScene() {
+		return startScene;
+	}
+
+	/**
+	 * Returns the GameScene
+	 * @return The GameScene
+	 */
+	
+	public GameScene getGameScene() {
+		return gameScene;
+	}
+	
+	/**
+	 * Returns the EndScene
+	 * @return The EndScene
+	 */
+
+	public EndScene getEndScene() {
+		return endScene;
+	}
+
+	/**
+	 * Returns the BallPitScene
+	 * @return The BallPitScene
+	 */
+	
+	public BallPitScene getBallPitScene() {
+		return ballPitScene;
+	}
+
+	/**
+	 * Returns the PuzzlewordScene
+	 * @return The PuzzlewordScene
+	 */
+	
+	public PuzzlewordScene getPuzzlewordScene() {
+		return puzzlewordScene;
 	}
 
 }

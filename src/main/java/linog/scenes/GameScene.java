@@ -4,26 +4,24 @@ import java.util.Set;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.KeyListener;
-import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
-
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import linog.LinogGame;
-import linog.Util;
 import linog.Words;
 import linog.entities.LinogLogo;
 import linog.entities.Scoreboard;
 import linog.entities.buttons.ContinueButton;
-import linog.entities.buttons.NextButton;
 import linog.entities.buttons.PuzzlewordButton;
+import linog.timers.ScoreboardTimer;
 
-public class GameScene extends DynamicScene implements KeyListener {
+public class GameScene extends DynamicScene implements KeyListener, TimerContainer {
 
 	private LinogGame game;
 
@@ -31,6 +29,8 @@ public class GameScene extends DynamicScene implements KeyListener {
 	private int currentRow = 0;
 	private int currentLetter = 0;
 	private boolean guessed = false;
+	
+	private Scoreboard scoreBoard;
 
 	public GameScene(LinogGame game) {
 		this.game = game;
@@ -59,18 +59,21 @@ public class GameScene extends DynamicScene implements KeyListener {
 
 		LinogLogo linogTitle = new LinogLogo((int) (getWidth() / 2), (int) (getHeight() / 5), 500, 250);
 		addEntity(linogTitle);
-
-		NextButton volgende = new NextButton(200, 500, "text", game);
-		addEntity(volgende);
 		
 		PuzzlewordButton puzzlewordButton = new PuzzlewordButton(75, 100, game);
 		addEntity(puzzlewordButton);
 
-		Scoreboard scoreBoard = new Scoreboard((int) ((getWidth() / 100) * 5), (int) ((getHeight() / 100) * 5));
+		scoreBoard = new Scoreboard((int) ((getWidth() / 100) * 5), (int) ((getHeight() / 100) * 5));
 		addEntity(scoreBoard);
 
 	}
 
+	/**
+	 * Write a word unto a row
+	 * @param row The row to put it on
+	 * @param word The word to put on it
+	 */
+	
 	public void writeWord(int row, String word) {
 		if (word.length() != 5)
 			return;
@@ -83,7 +86,16 @@ public class GameScene extends DynamicScene implements KeyListener {
 			board[row][i].setText(Character.toString(characters[i]));
 		}
 	}
-
+	
+	/**
+	 * Resets the board position to restart a guess
+	 */
+	
+	public void resetBoard() {
+		currentLetter = 0;
+		currentRow = 0;
+	}
+	
 	public void checkWord(int row, String word) {
 		int amountRight = 0;
 		word = word.toUpperCase();
@@ -102,16 +114,25 @@ public class GameScene extends DynamicScene implements KeyListener {
 		}
 
 		if (amountRight == 5) {
+			
+			SoundClip dooDooDoo = new SoundClip("audio/good.mp3");
+			dooDooDoo.play();
+			
 			TextEntity feedback = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 5),
-					"GOED GERADEN! DRUK OP ENTER OM DOOR TE GAAN!");
+					"GOED GERADEN! DRUK OP DE KNOP OM DOOR TE GAAN!");
 			feedback.setFill(Color.WHITE);
 			feedback.setAnchorPoint(AnchorPoint.CENTER_CENTER);
 			feedback.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 			addEntity(feedback);
 			
-			ContinueButton continueButton = new ContinueButton((int)(getWidth() / 5 * 4), (int)(getHeight() / 2), 2, game);
+			ContinueButton continueButton = new ContinueButton((int)(getWidth() / 5 * 4), (int)(getHeight() / 4 * 3), 2, game);
 			addEntity(continueButton);
+		} else {
+			SoundClip dooDooDoo = new SoundClip("audio/word.mp3");
+			dooDooDoo.play();
 		}
+		
+		
 	}
 
 	@Override
@@ -181,6 +202,12 @@ public class GameScene extends DynamicScene implements KeyListener {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void setupTimers() {
+		ScoreboardTimer scoreboardTimer = new ScoreboardTimer(this.scoreBoard);
+		addTimer(scoreboardTimer);
 	}
 	
 }

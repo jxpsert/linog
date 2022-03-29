@@ -3,8 +3,8 @@ package linog.entities.buttons;
 import com.github.hanyaeger.api.Coordinate2D;
 
 import javafx.scene.input.MouseButton;
-import javafx.scene.paint.Color;
 import linog.LinogGame;
+import linog.Words;
 import linog.entities.Scoreboard;
 
 /**
@@ -28,7 +28,10 @@ public class RetryButton extends Button {
 	public void onMouseButtonPressed(MouseButton arg0, Coordinate2D arg1) {
 		this.game.setActiveScene(0);
 		Scoreboard.setMoney(0);
-
+		Words.setCurrentPuzzleWord(Words.getTwelveLetterWord());
+		Words.setCurrentWord(Words.getFiveLetterWord());
+		game.getGameScene().resetBoard();
+		game.getPuzzlewordScene().resetBoard();
 	}
 
 }
