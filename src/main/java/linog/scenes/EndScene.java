@@ -17,6 +17,11 @@ public class EndScene extends StaticScene {
 
 	private LinogGame game;
 	
+	/**
+	 * Constructor
+	 * @param game The game the scene is in
+	 */
+	
 	public EndScene(LinogGame game) {
 		this.game = game;
 	}

@@ -15,6 +15,11 @@ public class StartScene extends StaticScene {
 	private StartButton startButton;
 	private LinogGame game;
 	
+	/**
+	 * Constructor
+	 * @param game The game the scene is in
+	 */
+	
 	public StartScene(LinogGame game) {
 		this.game = game;
 	}

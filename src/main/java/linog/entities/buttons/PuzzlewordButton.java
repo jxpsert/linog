@@ -28,6 +28,7 @@ public class PuzzlewordButton extends Button {
 	public void onMouseButtonPressed(MouseButton arg0, Coordinate2D arg1) {
 		// TODO Auto-generated method stub
 		game.setActiveScene(3);
+		game.getPuzzlewordScene().resetBoard();
 	}
 
 }

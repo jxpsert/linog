@@ -34,6 +34,11 @@ public class BallPitScene extends DynamicScene implements TimerContainer {
 	private TextEntity grabbedText;
 	private GrabBallButton grabBallButton;
 	private ContinueButton continueButton;
+	
+	/**
+	 * Constructor
+	 * @param game The game the scene is in
+	 */
 
 	public BallPitScene(LinogGame game) {
 		this.game = game;

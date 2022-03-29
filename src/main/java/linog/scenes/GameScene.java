@@ -31,6 +31,11 @@ public class GameScene extends DynamicScene implements KeyListener, TimerContain
 	private boolean guessed = false;
 	
 	private Scoreboard scoreBoard;
+	
+	/**
+	 * Constructor
+	 * @param game The game the scene is in
+	 */
 
 	public GameScene(LinogGame game) {
 		this.game = game;
