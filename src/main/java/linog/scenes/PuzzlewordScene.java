@@ -163,6 +163,8 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 			feedback.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 			addEntity(feedback);
 			guessedIt = true;
+			
+			Scoreboard.setMoney(Scoreboard.getMoney() + 50);
 
 			ContinueButton continueButton = new ContinueButton((int) (getWidth() / 2), (int) (getHeight() / 7 * 6 + 50),
 					4, game);

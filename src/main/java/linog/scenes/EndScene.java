@@ -11,6 +11,7 @@ import javafx.scene.text.FontWeight;
 import linog.LinogGame;
 import linog.entities.LinogLogo;
 import linog.entities.Scoreboard;
+import linog.entities.buttons.CloseButton;
 import linog.entities.buttons.RetryButton;
 
 public class EndScene extends StaticScene {
@@ -39,6 +40,9 @@ public class EndScene extends StaticScene {
 		
 		RetryButton retry = new RetryButton((int)(getWidth() / 2 - 50), (int)(getHeight() / 4 * 3), game);
 		addEntity(retry);
+		
+		CloseButton close = new CloseButton((int)(getWidth() / 2 + 50), (int)(getHeight() / 4 * 3), game);
+		addEntity(close);
 	}
 
 	@Override
