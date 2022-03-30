@@ -36,6 +36,10 @@ public class ContinueButton extends Button {
 		case 1:
 			Words.setCurrentWord(Words.getFiveLetterWord());
 			game.getGameScene().resetBoard();
+			game.getGameScene().setFeedback("EERSTE LETTER IS " + Character.toString(Words.getCurrentWord().charAt(0)).toUpperCase());
+			break;
+		case 2:
+			game.getBallPitScene().resetBallsHeight();
 			break;
 		}
 	}

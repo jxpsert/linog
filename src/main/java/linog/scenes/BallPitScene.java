@@ -56,7 +56,7 @@ public class BallPitScene extends DynamicScene implements TimerContainer {
 		grabBallButton = new GrabBallButton((int) (getWidth() / 2), (int) (getHeight() / 4), game);
 		addEntity(grabBallButton);
 		
-		grabbedText = new TextEntity(new Coordinate2D((int) (getWidth() / 4 * 3), (int) (getHeight() / 6)), "");
+		grabbedText = new TextEntity(new Coordinate2D((int) (getWidth() / 4 * 3), (int) (getHeight() / 6)));
 		grabbedText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
 		grabbedText.setFill(Color.WHITE);
 		grabbedText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
@@ -100,6 +100,14 @@ public class BallPitScene extends DynamicScene implements TimerContainer {
 //			System.out.println("Bal getekend " + i);
 		}
 
+	}
+	
+	public void resetBallsHeight() {
+		Random rand = new Random();
+		for(int i = 0; i < balls.size(); i++) {
+			balls.get(i).setAnchorLocationY(rand.nextInt((int)(getHeight() / 2)));
+			balls.get(i).setMotion(5, rand.nextInt(180));
+		}
 	}
 
 	public void grabBall() {

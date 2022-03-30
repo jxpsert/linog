@@ -38,10 +38,10 @@ public class EndScene extends StaticScene {
 		profitText.setFont(Font.font("Roboto", FontWeight.BOLD, 50));
 		addEntity(profitText);
 		
-		RetryButton retry = new RetryButton((int)(getWidth() / 2 - 50), (int)(getHeight() / 4 * 3), game);
+		RetryButton retry = new RetryButton((int)(getWidth() / 2 - 75), (int)(getHeight() / 4 * 3), game);
 		addEntity(retry);
 		
-		CloseButton close = new CloseButton((int)(getWidth() / 2 + 50), (int)(getHeight() / 4 * 3), game);
+		CloseButton close = new CloseButton((int)(getWidth() / 2 + 75), (int)(getHeight() / 4 * 3), game);
 		addEntity(close);
 	}
 

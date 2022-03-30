@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 
 import javafx.scene.input.MouseButton;
 import linog.LinogGame;
+import linog.Words;
 
 /**
  * A button containing the word "Terug". Makes you go back.
@@ -27,5 +28,6 @@ public class BackButton extends Button {
 	public void onMouseButtonPressed(MouseButton mouse, Coordinate2D coordinate2) {
 		// TODO Auto-generated method stub
 		this.game.setActiveScene(1);
+		game.getGameScene().setFeedback("EERSTE LETTER IS " + Character.toString(Words.getCurrentWord().charAt(0)).toUpperCase());
 	}
 }

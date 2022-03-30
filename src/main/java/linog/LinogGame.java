@@ -48,7 +48,7 @@ public class LinogGame extends YaegerGame {
 		setGameTitle("LINOG");
 		setSize(new Size(1280, 720));
 		setBackgroundAudio("audio/bgmusic.mp3");
-		setBackgroundAudioVolume(1);
+		setBackgroundAudioVolume(0.1);
 	}
 
 	/**

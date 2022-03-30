@@ -5,5 +5,5 @@ module waterworld {
 	exports linog; 
 	          
     opens audio;       
-    opens backgrounds;  
-}                           
+    opens backgrounds;     
+}                         

@@ -7,6 +7,7 @@ import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.KeyListener;
 
@@ -49,7 +50,7 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 
 		for (int i = 0; i < Words.getCurrentPuzzleWord().length(); i++) {
 			word.add(Character.toString(Words.getCurrentPuzzleWord().charAt(i))); // Splitting the word up into letters
-																					// (chars)
+																				  // (chars)
 		}
 	}
 
@@ -156,8 +157,12 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 		}
 
 		if (amountRight == 12) {
+			
+			SoundClip dooDooDoo = new SoundClip("audio/goodpuzzle.mp3");
+			dooDooDoo.play();
+			
 			TextEntity feedback = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 7 * 6),
-					"GOED GERADEN!");
+					"GOED GERADEN! + € 50");
 			feedback.setFill(Color.WHITE);
 			feedback.setAnchorPoint(AnchorPoint.CENTER_CENTER);
 			feedback.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
@@ -197,8 +202,12 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 
 		if (Character.isLetter(pressedLetter)) {
 			board[currentLetter].setText(Character.toString(pressedLetter));
+			for(int i = 0; i < board.length; i++) {
+				board[i].setFill(Color.BLACK);
+			}
 			if (currentLetter < 11) {
 				currentLetter++;
+				board[currentLetter].setText("-");
 			}
 		}
 
@@ -219,16 +228,22 @@ public class PuzzlewordScene extends DynamicScene implements KeyListener, TimerC
 
 			break;
 		case BACK_SPACE:
+			if (currentLetter > 0) {
+				currentLetter--;
+			}
 			int letterToDelete = currentLetter;
 			if (letterToDelete < 0) {
 				letterToDelete = 0;
-			} else if (currentLetter == 11) {
-				letterToDelete = currentLetter;
 			}
 
-			board[letterToDelete].setText("");
-			if (currentLetter > 0) {
-				currentLetter--;
+			if (letterToDelete != 0) {
+				board[letterToDelete].setText("-");
+			} else if(letterToDelete == 0) {
+				board[letterToDelete].setText("-");
+			}
+			
+			if(letterToDelete != 11) {
+				board[letterToDelete + 1].setText("");
 			}
 			break;
 		default:

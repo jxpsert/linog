@@ -6,6 +6,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import linog.LinogGame;
+import linog.Words;
 /**
  * A button containing the word "start". Makes you start the game.
  */
@@ -26,8 +27,8 @@ public class StartButton extends Button {
 
 	@Override
 	public void onMouseButtonPressed(MouseButton arg0, Coordinate2D arg1) {
-		// TODO Auto-generated method stub
 		game.setActiveScene(1);
+		game.getGameScene().setFeedback("EERSTE LETTER IS " + Character.toString(Words.getCurrentWord().charAt(0)).toUpperCase());
 	}
 
 }

@@ -7,6 +7,7 @@ import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseEnterListener;
 import com.github.hanyaeger.api.userinput.MouseExitListener;
 
+import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -42,14 +43,17 @@ public abstract class Button extends TextEntity
 		this.setAnchorPoint(AnchorPoint.CENTER_CENTER);
 		this.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
 		this.setText("[" + text + "]");
+		this.setViewOrder(0);
 	}
 
 	public void onMouseEntered() {
 		setFill(Color.LIGHTGREY);
+		setCursor(Cursor.HAND);
 	}
 
 	public void onMouseExited() {
 		setFill(Color.WHITE);
+		setCursor(Cursor.DEFAULT);
 	}
 
 	public void hide() {

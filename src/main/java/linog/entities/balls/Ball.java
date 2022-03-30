@@ -44,15 +44,14 @@ public class Ball extends DynamicCircleEntity implements Collider, Collided, New
 		Random rand = new Random();
 		setMotion(5, rand.nextInt(180));
 
-		setGravityConstant(1.00);
-		setFrictionConstant(0.01);
-		//System.out.println("x" + x + "y" + y);
+		setGravityConstant(2);
+		setFrictionConstant(0.005);
 	}
 
 	@Override
 	public void onCollision(Collider arg0) {
 		//invertSpeedInDirection(getDirection());
-		// Gebruikt om code te testen van collisions tussen ballen
+		// Used to test collision code
 	}
 
 	@Override
