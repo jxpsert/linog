@@ -156,13 +156,8 @@ public class GameScene extends DynamicScene implements KeyListener, TimerContain
 		}
 
 		if (amountRight < 5 && currentRow == 4) {
-			TextEntity feedback = new TextEntity(new Coordinate2D(getWidth() / 2, getHeight() / 5),
-					"HELAAS, NIET GERADEN. HET WOORD WAS: " + Words.getCurrentWord().toUpperCase());
-			feedback.setFill(Color.WHITE);
-			feedback.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-			feedback.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
-			addEntity(feedback);
-
+			 
+			setFeedback("HELAAS! HET WOORD WAS: " + Words.getCurrentWord().toUpperCase());
 			ContinueButton continueButton = new ContinueButton((int) (getWidth() / 5 * 4), (int) (getHeight() / 5 * 3),
 					4, game);
 			addEntity(continueButton);
